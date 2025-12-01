@@ -1,0 +1,20 @@
+{
+  "name": "splitpal",
+  "version": "1.0.0",
+  "description": "Group Expense Sharing Backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github-professional:revenue-practice/SplitPal.git"
+  },
+  "author": "Developer Riyansh",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "nodemon": "^3.1.11"
+  }
+}
