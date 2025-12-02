@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const { createUser, isExistingUser } = require('../models/auth.signup.model');
+const { isExistingUserModel, createUserModel } = require('../models/auth.signup.model');
 const { isValidString } = require('../utils/helper');
 const saltRounds = Number(process.env.SALT);
 
@@ -16,28 +16,25 @@ const userSignup = async (req, res) => {
     }
 
     try {
-        const doUserExists = await isExistingUser(email);
+        const doUserExists = await isExistingUserModel(email);
         if (doUserExists.isUser) return res.status(200).send(`User already exists, kindly login`);
 
         const hashedPassword = bcrypt.hashSync(password, saltRounds);
-        const response = await createUser(email, hashedPassword, fName, lName);
+        const response = await createUserModel(email, hashedPassword, fName, lName);
         if (response.code === 201) {
-            return res.status(201).json({
-                code: 201,
+            return res.status(response.code).json({
                 status: 'OK',
                 message: 'Account created'
             });
         }
 
-        res.status(500).json({
-            code: 500,
+        res.status(response.code).json({
             status: '',
             message: 'Internal Server Error'
         });
     }
     catch (error) {
-        res.status(500).json({
-            code: 500,
+        res.status(response.code).json({
             status: '',
             message: error.message ?? 'Internal Server Error'
         });
