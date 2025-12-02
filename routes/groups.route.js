@@ -8,5 +8,6 @@ router.use(allowUserForAction);
 router.post('/create', createGroup);
 router.put('/edit/:id', editGroup);
 router.put('/transfer/:id/:ownerId', transferGroupOwnerShip);
+// router.get('/fetchAll');
 
 module.exports = router;
