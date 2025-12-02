@@ -26,8 +26,8 @@ const createUserModel = async (email, password, fName, lName) => {
         const authQuery = `INSERT INTO ${DBTABLES.auth} VALUES ($1, $2, $3, $4, $5)`;
         const authQueryParams = [authId, password, userId, currentTime, currentTime];
 
-        const result = await Promise.all([executeAsyncQueryWithoutLock(userQuery, userQueryParams), executeAsyncQueryWithoutLock(authQuery, authQueryParams)]);
-        if (result.length === 2 && result[0].rowCount && result[1].rowCount) return createRecordSuccessCode;
+        const response = await Promise.all([executeAsyncQueryWithoutLock(userQuery, userQueryParams), executeAsyncQueryWithoutLock(authQuery, authQueryParams)]);
+        if (response.length === 2 && response[0].rowCount && response[1].rowCount) return createRecordSuccessCode;
 
         return internalServerErrorCode;
     }

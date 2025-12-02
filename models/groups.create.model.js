@@ -3,13 +3,16 @@ const { executeAsyncQueryWithoutLock } = require('../utils/helper');
 const { v4: uuidv4 } = require('uuid');
 
 const createGroupModel = async (name, description, owner_id) => {
-    const id = uuidv4(), currentTime = new Date().toISOString();
+    const groupId = uuidv4(), groupMemberId = uuidv4(), currentTime = new Date().toISOString();
     try {
-        const query = `INSERT INTO ${DBTABLES.groups} VALUES ($1, $2, $3, $4, $5, $6, $7)`;
-        const queryParams = [id, name, description, owner_id, true, currentTime, currentTime];
+        const groupQuery = `INSERT INTO ${DBTABLES.groups} VALUES ($1, $2, $3, $4, $5, $6, $7)`;
+        const groupQueryParams = [groupId, name, description, owner_id, true, currentTime, currentTime];
 
-        const response = await executeAsyncQueryWithoutLock(query, queryParams);
-        if(response.rowCount) return createRecordSuccessCode;
+        const groupMembersQuery = `INSERT INTO ${DBTABLES.groupMembers} VALUES ($1, $2, $3, $4, $5, $6)`;
+        const groupMembersQueryParams = [groupMemberId, owner_id, groupId, true, currentTime, currentTime];
+
+        const response = await Promise.all([executeAsyncQueryWithoutLock(groupQuery, groupQueryParams), executeAsyncQueryWithoutLock(groupMembersQuery, groupMembersQueryParams)]);
+        if (response.length === 2 && response[0].rowCount && response[1].rowCount) return createRecordSuccessCode;
 
         return internalServerErrorCode;
     }

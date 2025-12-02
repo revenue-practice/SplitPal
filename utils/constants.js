@@ -2,6 +2,7 @@ const DBTABLES = {
     users: 'USERS',
     auth: 'CREDENTIALS',
     groups: 'GROUPS',
+    groupMembers: 'GROUP_MEMBERS',
 };
 
 const statusResponse = {

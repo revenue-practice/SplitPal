@@ -1,0 +1,15 @@
+USE DATABASE SPLITPAL;
+CREATE TABLE IF NOT EXISTS GROUP_MEMBERS (
+    id uuid PRIMARY KEY,
+    user_id uuid UNIQUE NOT NULL,
+    group_id uuid UNIQUE NOT NULL,
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES USERS(id),
+    FOREIGN KEY (group_id) REFERENCES GROUPS(id),
+    CONSTRAINT GROUP_MEMBERS_UNIQUE_PAIR(id, user_id)
+);
+
+CREATE INDEX group_member_index ON GROUP_MEMBERS(group_id);
+CREATE INDEX user_member_index ON GROUP_MEMBERS(user_id);
