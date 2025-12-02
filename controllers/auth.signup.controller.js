@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const { isExistingUserModel, createUserModel } = require('../models/auth.signup.model');
 const { isValidString } = require('../utils/helper');
+const { errorResponse } = require('../utils/constants');
 const saltRounds = Number(process.env.SALT);
 
 const userSignup = async (req, res) => {
@@ -28,16 +29,10 @@ const userSignup = async (req, res) => {
             });
         }
 
-        res.status(response.code).json({
-            status: '',
-            message: 'Internal Server Error'
-        });
+        errorResponse(res, response);
     }
     catch (error) {
-        res.status(response.code).json({
-            status: '',
-            message: error.message ?? 'Internal Server Error'
-        });
+        errorResponse(res);
     }
 };
 

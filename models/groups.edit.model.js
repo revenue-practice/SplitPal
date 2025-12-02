@@ -1,4 +1,4 @@
-const { DBTABLES } = require("../utils/constants");
+const { DBTABLES, internalServerErrorCode, acceptedSuccessCode } = require("../utils/constants");
 const { isValidString, executeAsyncQueryWithoutLock } = require("../utils/helper");
 
 const editGroupModel = async (id, name, description) => {
@@ -15,10 +15,13 @@ const editGroupModel = async (id, name, description) => {
     }
 
     baseQuery += `WHERE id = $${queryParams.length + 1}`;
+    queryParams.push(id);
 
     try {
         const response = await executeAsyncQueryWithoutLock(baseQuery, queryParams);
-        console.log(response);
+        if(response.rowCount) return acceptedSuccessCode;
+
+        return internalServerErrorCode;
     }
     catch (error) {
         throw new Error(error);

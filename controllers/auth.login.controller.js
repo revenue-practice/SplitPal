@@ -2,6 +2,7 @@ const { isExistingUserModel } = require('../models/auth.signup.model');
 const { isUserAuthenticated, isValidString } = require('../utils/helper');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const { errorResponse } = require('../utils/constants');
 
 const authSecret = process.env.JWT_SECRET;
 
@@ -35,10 +36,7 @@ const userLogin = async (req, res) => {
         });
     }
     catch (error) {
-        res.status(response.code).json({
-            status: '',
-            message: error.message ?? 'Internal Server Error'
-        });
+        errorResponse(res);
     }
 };
 

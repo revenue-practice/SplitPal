@@ -2,10 +2,11 @@ const express = require('express');
 const router = express.Router();
 
 const { allowUserForAction } = require('../utils/helper');
-const { createGroup, editGroup } = require('../controllers/groups.controller');
+const { createGroup, editGroup, transferGroupOwnerShip } = require('../controllers/groups.controller');
 
 router.use(allowUserForAction);
-router.use('/create', createGroup);
-router.use('/edit/:id', editGroup);
+router.post('/create', createGroup);
+router.put('/edit/:id', editGroup);
+router.put('/transfer/:id/:ownerId', transferGroupOwnerShip);
 
 module.exports = router;

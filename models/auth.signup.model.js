@@ -1,4 +1,4 @@
-const { DBTABLES } = require('../utils/constants');
+const { DBTABLES, internalServerErrorCode, createRecordSuccessCode } = require('../utils/constants');
 const { executeAsyncQueryWithoutLock } = require('../utils/helper');
 const { pool } = require('./pool');
 const { v4: uuidv4 } = require('uuid');
@@ -27,9 +27,9 @@ const createUserModel = async (email, password, fName, lName) => {
         const authQueryParams = [authId, password, userId, currentTime, currentTime];
 
         const result = await Promise.all([executeAsyncQueryWithoutLock(userQuery, userQueryParams), executeAsyncQueryWithoutLock(authQuery, authQueryParams)]);
-        if (result.length === 2 && result[0].rowCount && result[1].rowCount) return { code: 201 };
+        if (result.length === 2 && result[0].rowCount && result[1].rowCount) return createRecordSuccessCode;
 
-        return { code: 500 }
+        return internalServerErrorCode;
     }
     catch (error) {
         throw new Error(error);

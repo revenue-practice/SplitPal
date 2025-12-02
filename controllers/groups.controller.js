@@ -1,6 +1,8 @@
 const { isValidString } = require('../utils/helper');
-const { statusResponse } = require('../utils/constants');
+const { statusResponse, errorResponse } = require('../utils/constants');
 const { createGroupModel } = require('../models/groups.create.model');
+const { editGroupModel } = require('../models/groups.edit.model');
+const { transferGroupOwnerShipModel } = require('../models/groups.transfer.model');
 
 const createGroup = async (req, res) => {
     const { name, description, owner_id } = req.body;
@@ -22,7 +24,7 @@ const createGroup = async (req, res) => {
         });
     }
     catch (error) {
-        res.status(response.code).json({
+        res.status(500).json({
             status: '',
             message: error.message ?? 'Internal Server Error'
         });
@@ -38,14 +40,38 @@ const editGroup = async (req, res) => {
         return res.status(400).send('Both Name and description cannot be invalid');
 
     try {
+        const response = await editGroupModel(id, name, description);
+        if(response.code === 200) return res.status(response.code).json({
+            status: 'Ok',
+            message: 'Group details updated'
+        });
 
+        errorResponse(res, response);
     }
     catch (error) {
-
+        errorResponse(res);
     }
-};  
+}; 
+
+const transferGroupOwnerShip = async (req, res) => {
+    const { id, ownerId } = req.params;
+    if(!isValidString(id) || !isValidString(ownerId)) return res.status(403).send('Forbidden action');
+    try {
+        const response = await transferGroupOwnerShipModel(id, ownerId);
+        if(response.code === 200) return res.status(response.code).json({
+            status: 'Ok',
+            message: 'Group ownership transfered'
+        });
+
+        errorResponse(res, response);
+    }
+    catch (error) {
+        errorResponse(res);
+    }
+}; 
 
 module.exports = {
     createGroup,
-    editGroup
+    editGroup,
+    transferGroupOwnerShip
 };
