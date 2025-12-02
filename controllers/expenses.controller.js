@@ -1,0 +1,48 @@
+const { createExpenseModel, editExpenseModel } = require("../models/expenses.create.model");
+const { statusResponse, errorResponse } = require("../utils/constants");
+const { isValidString, isArray } = require("../utils/helper");
+
+const createExpense = async (req, res) => {
+    const { group: groupId, user: userId } = req.params;
+    if(!isValidString(groupId) || !isValidString(userId)) return res.status(403).send(statusResponse[403]);
+
+    const { name, description, totalAmount, memberParticipation } = req.body;
+    if(!isValidString(name) || !isValidString(description)) return res.status(400).send('Both name and description should be valid');
+    if(!isValidInteger(totalAmount)) return res.status(400).send('Invalid amount, amount must be an integer');
+    if(!isArray(memberParticipation)) return res.status(400).send('Invalid member split on expense');
+
+    try {
+        const response = await createExpenseModel(groupId, userId, name, description, totalAmount, memberParticipation);
+        if(response.code === 201) return res.status(response.code).send(`Expense created successfully`);
+
+        errorResponse(res, response);
+    }
+    catch (error) {
+        errorResponse(res, null, error);
+    }
+};
+
+const editExpense = async (req, res) => {
+    const { group: groupId, user: userId, expenseId } = req.params;
+    if(!isValidString(groupId) || !isValidString(userId) || !isValidString(expenseId)) return res.status(403).send(statusResponse[403]);
+
+    const { name, description, totalAmount, memberParticipation } = req.body;
+    if(!isValidString(name) || !isValidString(description)) return res.status(400).send('Both name and description should be valid');
+    if(!isValidInteger(totalAmount)) return res.status(400).send('Invalid amount, amount must be an integer');
+    if(!isArray(memberParticipation)) return res.status(400).send('Invalid member split on expense');
+
+    try {
+        const response = await editExpenseModel(groupId, userId, expenseId, name, description, totalAmount, memberParticipation);
+        if(response.code === 200) return res.status(response.code).send(`Expense updated successfully`);
+
+        errorResponse(res, response);
+    }
+    catch (error) {
+        errorResponse(res, null, error);
+    }
+}
+
+module.exports = {
+    createExpense,
+    editExpense
+};

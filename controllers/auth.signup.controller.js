@@ -32,7 +32,7 @@ const userSignup = async (req, res) => {
         errorResponse(res, response);
     }
     catch (error) {
-        errorResponse(res);
+        errorResponse(res, null, error);
     }
 };
 
