@@ -3,17 +3,19 @@ const DBTABLES = {
     auth: 'CREDENTIALS',
     groups: 'GROUPS',
     groupMembers: 'GROUP_MEMBERS',
+    expenses: 'EXPENSES',
+    splits: 'SPLITS',
 };
 
 const statusResponse = {
     403: 'Forbidden request'
 };
 
-const errorResponse = (res, response) => {
+const errorResponse = (res, response, error) => {
     res.status(response.code ?? 500).json({
-            status: '',
-            message: 'Internal Server Error'
-        });
+        status: '',
+        message: error.message ?? 'Internal Server Error'
+    });
 }
 
 const internalServerErrorCode = { code: 500 };

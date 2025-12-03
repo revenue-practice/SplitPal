@@ -36,7 +36,7 @@ const userLogin = async (req, res) => {
         });
     }
     catch (error) {
-        errorResponse(res);
+        errorResponse(res, null, error);
     }
 };
 

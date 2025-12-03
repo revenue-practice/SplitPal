@@ -49,7 +49,7 @@ const editGroup = async (req, res) => {
         errorResponse(res, response);
     }
     catch (error) {
-        errorResponse(res);
+        errorResponse(res, null, error);
     }
 }; 
 
@@ -66,7 +66,7 @@ const transferGroupOwnerShip = async (req, res) => {
         errorResponse(res, response);
     }
     catch (error) {
-        errorResponse(res);
+        errorResponse(res, null, error);
     }
 }; 
 

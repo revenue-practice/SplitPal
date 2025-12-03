@@ -6,6 +6,9 @@ const isNeitherNullNorUndefined = (val) => val !== undefined && val !== null;
 const isEitherNullOrUndefined = (val) => !isNeitherNullNorUndefined(val);
 const isEmptyString = (val) => val === "";
 const isValidString = (val) => isNeitherNullNorUndefined(val) && !isEmptyString(val);
+const isInteger = (val) => typeof val === 'number' && val !== NaN;
+const isValidInteger = (val) => isNeitherNullNorUndefined(val) && isInteger(val);
+const isArray = (val) => isEitherNullOrUndefined(val) && Array.isArray(val) && val.length;
 const executeAsyncQueryWithoutLock = async (query, params) => {
     return await pool.query(query, params);
 }
@@ -30,6 +33,9 @@ module.exports = {
     isEitherNullOrUndefined,
     isEmptyString,
     isValidString,
+    isInteger,
+    isValidInteger,
+    isArray,
     executeAsyncQueryWithoutLock,
     isUserAuthenticated,
     allowUserForAction
