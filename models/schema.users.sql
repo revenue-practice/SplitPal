@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS USERS (
     lname TEXT NOT NULL,
     email TEXT NOT NULL UNIQUE,
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    updated_at TIMESTAMPTZ NOT NULL
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
-CREATE INDEX email_index ON USERS(email);
+CREATE INDEX IF NOT EXISTS index_user_email ON USERS(email);

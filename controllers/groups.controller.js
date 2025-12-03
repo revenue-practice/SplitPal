@@ -3,6 +3,7 @@ const { statusResponse, errorResponse } = require('../utils/constants');
 const { createGroupModel } = require('../models/groups.create.model');
 const { editGroupModel } = require('../models/groups.edit.model');
 const { transferGroupOwnerShipModel } = require('../models/groups.transfer.model');
+const { fetchAllUsersPerGroupModel } = require('../models/groups.fetch.model');
 
 const createGroup = async (req, res) => {
     const { name, description, owner_id } = req.body;
@@ -70,8 +71,21 @@ const transferGroupOwnerShip = async (req, res) => {
     }
 }; 
 
+const fetchAllUsersPerGroup = async (req, res) => {
+    const userId = req.params.id;
+    if(!isValidString(userId)) return res.status(403).send(statusResponse[403]);
+
+    try { 
+        const userGroups = await fetchAllUsersPerGroupModel(userId);
+    }
+    catch (error) {
+        errorResponse(res, null, error);
+    }
+};
+
 module.exports = {
     createGroup,
     editGroup,
-    transferGroupOwnerShip
+    transferGroupOwnerShip,
+    fetchAllUsersPerGroup
 };
