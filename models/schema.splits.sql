@@ -11,5 +11,5 @@ CREATE TABLE IF NOT EXISTS SPLITS (
     CONSTRAINT SPLITS_UNIQUE_PAIR UNIQUE(id, expense_id)
 );
 
-CREATE INDEX split_by_expense_index ON EXPENSES(expense_id);
-CREATE INDEX split_by_receiver_index ON USERS(receiver_id);
+CREATE INDEX split_by_expense_index ON SPLITS(expense_id);
+CREATE INDEX split_by_receiver_index ON SPLITS(receiver_id);
