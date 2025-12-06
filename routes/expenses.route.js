@@ -1,10 +1,11 @@
 const express = require('express');
-const allowUserForAction = require('../utils/helper');
-const { createExpense, editExpense } = require('../controllers/expenses.controller');
 const router = express.Router();
 
-// router.use(allowUserForAction);
-// router.post('/create/:group/:user', createExpense);
-// router.put('/edit/:group/:user', editExpense);
+const { allowUserForAction } = require('../utils/helper');
+const { createExpense, editExpense } = require('../controllers/expenses.controller');
+
+router.use(allowUserForAction);
+router.post('/create/:group_id/:user_id', createExpense);
+router.put('/edit/:group_id/:user_id/:expense_id', editExpense);
 
 module.exports = router;

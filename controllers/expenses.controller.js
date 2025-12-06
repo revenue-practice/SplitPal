@@ -1,13 +1,13 @@
 const { createExpenseModel, editExpenseModel } = require("../models/expenses.create.model");
 const { statusResponse, errorResponse } = require("../utils/constants");
-const { isValidString, isArray } = require("../utils/helper");
+const { isValidString, isArray, isString, isValidInteger } = require("../utils/helper");
 
 const createExpense = async (req, res) => {
-    const { group: groupId, user: userId } = req.params;
+    const { group_id: groupId, user_id: userId } = req.params;
     if(!isValidString(groupId) || !isValidString(userId)) return res.status(403).json({ message: statusResponse[403] });
 
-    const { name, description, totalAmount, memberParticipation } = req.body;
-    if(!isValidString(name) || !isValidString(description)) return res.status(400).json({ message: 'Both name and description should be valid' });
+    const { name, description, total_amount: totalAmount, members: memberParticipation } = req.body;
+    if(!isValidString(name) || !isString(description)) return res.status(400).json({ message: 'Both name and description should be valid' });
     if(!isValidInteger(totalAmount)) return res.status(400).json({ message: 'Invalid amount, amount must be an integer' });
     if(!isArray(memberParticipation)) return res.status(400).json({ message: 'Invalid member split on expense' });
 
@@ -23,10 +23,10 @@ const createExpense = async (req, res) => {
 };
 
 const editExpense = async (req, res) => {
-    const { group: groupId, user: userId, expenseId } = req.params;
+    const { group_id: groupId, user_id: userId, expense_id: expenseId } = req.params;
     if(!isValidString(groupId) || !isValidString(userId) || !isValidString(expenseId)) return res.status(403).json({ message: statusResponse[403] });
 
-    const { name, description, totalAmount, memberParticipation } = req.body;
+    const { name, description, total_amount: totalAmount, members: memberParticipation } = req.body;
     if(!isValidString(name) || !isValidString(description)) return res.status(400).json({ message: 'Both name and description should be valid' });
     if(!isValidInteger(totalAmount)) return res.status(400).json({ message: 'Invalid amount, amount must be an integer' });
     if(!isArray(memberParticipation)) return res.status(400).json({ message: 'Invalid member split on expense' });

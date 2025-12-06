@@ -9,10 +9,12 @@ const isEmptyString = (val) => isString(val) && val === "";
 const isValidString = (val) => isNeitherNullNorUndefined(val) && isString(val) && !isEmptyString(val);
 const isInteger = (val) => typeof val === 'number' && val !== NaN;
 const isValidInteger = (val) => isNeitherNullNorUndefined(val) && isInteger(val);
-const isArray = (val) => isEitherNullOrUndefined(val) && Array.isArray(val) && val.length;
+const isArray = (val) => isNeitherNullNorUndefined(val) && Array.isArray(val) && val.length;
+
 const executeAsyncQueryWithoutLock = async (query, params) => {
     return await pool.query(query, params);
-}
+};
+
 const isUserAuthenticated = (req) => {
     const authHeader = req.cookies['Authorisation'];
     if(isValidString(authHeader)) {
@@ -20,14 +22,15 @@ const isUserAuthenticated = (req) => {
         if(scheme === "Bearer" && jwt.verify(token, authSecret)) return true;
     }
     return false;
-}
+};
+
 const allowUserForAction = (req, res, next) => {
     const authHeader = req.cookies['Authorisation'];
     if(isValidString(authHeader)) {
         const [scheme, token] = authHeader.split(" ");
         if(scheme === "Bearer" && jwt.verify(token, authSecret)) next();
     }
-}
+};
 
 module.exports = {
     isNeitherNullNorUndefined,
