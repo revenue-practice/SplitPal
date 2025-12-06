@@ -1,4 +1,4 @@
-const { DBTABLES, internalServerErrorCode, acceptedSuccessCode } = require("../utils/constants");
+const { DBTABLES, noDataReturnedErrorCode, acceptedSuccessCode } = require("../utils/constants");
 const { isValidString, executeAsyncQueryWithoutLock } = require("../utils/helper");
 
 const editGroupModel = async (id, name, description) => {
@@ -23,7 +23,7 @@ const editGroupModel = async (id, name, description) => {
         if(!response.rowCount) return { message: 'Wrong query for update' };
         if(response.rowCount) return acceptedSuccessCode;
 
-        return internalServerErrorCode;
+        return noDataReturnedErrorCode;
     }
     catch (error) {
         throw new Error(error);

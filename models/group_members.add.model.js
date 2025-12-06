@@ -1,4 +1,4 @@
-const { DBTABLES, createRecordSuccessCode } = require("../utils/constants");
+const { DBTABLES, createRecordSuccessCode, noDataReturnedErrorCode } = require("../utils/constants");
 const { v4: uuidv4 } = require('uuid');
 const { executeAsyncQueryWithoutLock } = require("../utils/helper");
 
@@ -11,7 +11,7 @@ const addMemberToGroupModel = async (groupId, memberId) => {
         const response = await executeAsyncQueryWithoutLock(query, queryParams);
         if(response.rowCount) return createRecordSuccessCode;
 
-        return internalServerErrorCode;
+        return noDataReturnedErrorCode;
     }
     catch (error) {
         throw new Error(error);

@@ -19,6 +19,7 @@ const errorResponse = (res, response, error) => {
 }
 
 const internalServerErrorCode = { code: 500 };
+const noDataReturnedErrorCode = { code: 400, message: 'No data found' };
 const createRecordSuccessCode = { code: 201 };
 const acceptedSuccessCode = { code: 200 };
 
@@ -27,6 +28,7 @@ module.exports = {
     statusResponse,
     errorResponse,
     internalServerErrorCode,
+    noDataReturnedErrorCode,
     createRecordSuccessCode,
     acceptedSuccessCode
 };

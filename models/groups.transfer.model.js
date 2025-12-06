@@ -1,4 +1,4 @@
-const { DBTABLES, internalServerErrorCode, acceptedSuccessCode } = require("../utils/constants");
+const { DBTABLES, noDataReturnedErrorCode, acceptedSuccessCode } = require("../utils/constants");
 const { executeAsyncQueryWithoutLock } = require("../utils/helper");
 const { fetchGroupUserDetailsModel } = require("./group_members.fetch.model");
 
@@ -13,7 +13,7 @@ const transferGroupOwnerShipModel = async (id, ownerId) => {
             const response = await executeAsyncQueryWithoutLock(transferQuery, [ownerId, currentTime, id]);
             if (response.rowCount) return acceptedSuccessCode;
 
-            return internalServerErrorCode;
+            return noDataReturnedErrorCode;
         }
         catch (error) {
             throw new Error(error);

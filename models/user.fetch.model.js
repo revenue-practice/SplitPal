@@ -1,4 +1,4 @@
-const { DBTABLES, internalServerErrorCode, acceptedSuccessCode } = require("../utils/constants");
+const { DBTABLES, noDataReturnedErrorCode, acceptedSuccessCode } = require("../utils/constants");
 const { executeAsyncQueryWithoutLock } = require("../utils/helper");
 
 const fetchGroupsModel = async (userId) => {
@@ -11,7 +11,7 @@ const fetchGroupsModel = async (userId) => {
             data: response.rows
         };
 
-        return internalServerErrorCode;
+        return noDataReturnedErrorCode;
     }
     catch (error) {
         throw new Error(error);
