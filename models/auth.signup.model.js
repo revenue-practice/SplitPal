@@ -9,7 +9,7 @@ const isExistingUserModel = async (email) => {
                        ON users.id = auth.user_id WHERE users.email = $1 LIMIT 1`;
 
         const response = await pool.query(query, [email]);
-        if (response.rowCount) return { isUser: true, data: response.rows[0] };
+        if (response.rowCount) return { code: 200, isUser: true, data: response.rows[0] };
     }
     catch (error) {
         return { isUser: false };
@@ -26,7 +26,9 @@ const createUserModel = async (email, password, fName, lName) => {
         const authQuery = `INSERT INTO ${DBTABLES.auth} VALUES ($1, $2, $3, $4, $5)`;
         const authQueryParams = [authId, password, userId, currentTime, currentTime];
 
-        const response = await Promise.all([executeAsyncQueryWithoutLock(userQuery, userQueryParams), executeAsyncQueryWithoutLock(authQuery, authQueryParams)]);
+        const userResponse = await executeAsyncQueryWithoutLock(userQuery, userQueryParams);
+        const authResponse = await executeAsyncQueryWithoutLock(authQuery, authQueryParams);
+        const response = [userResponse, authResponse];
         if (response.length === 2 && response[0].rowCount && response[1].rowCount) return createRecordSuccessCode;
 
         return internalServerErrorCode;

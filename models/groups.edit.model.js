@@ -19,6 +19,8 @@ const editGroupModel = async (id, name, description) => {
 
     try {
         const response = await executeAsyncQueryWithoutLock(baseQuery, queryParams);
+    
+        if(!response.rowCount) return { message: 'Wrong query for update' };
         if(response.rowCount) return acceptedSuccessCode;
 
         return internalServerErrorCode;

@@ -13,8 +13,8 @@ const statusResponse = {
 
 const errorResponse = (res, response, error) => {
     res.status(response.code ?? 500).json({
-        status: '',
-        message: error.message ?? 'Internal Server Error'
+        status: response.status ?? '',
+        message: response.message ?? error.message ?? 'Internal Server Error'
     });
 }
 

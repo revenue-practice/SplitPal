@@ -4,8 +4,9 @@ const authSecret = process.env.JWT_SECRET;
 
 const isNeitherNullNorUndefined = (val) => val !== undefined && val !== null;
 const isEitherNullOrUndefined = (val) => !isNeitherNullNorUndefined(val);
-const isEmptyString = (val) => val === "";
-const isValidString = (val) => isNeitherNullNorUndefined(val) && !isEmptyString(val);
+const isString = (val) => typeof val === 'string';
+const isEmptyString = (val) => isString(val) && val === "";
+const isValidString = (val) => isNeitherNullNorUndefined(val) && isString(val) && !isEmptyString(val);
 const isInteger = (val) => typeof val === 'number' && val !== NaN;
 const isValidInteger = (val) => isNeitherNullNorUndefined(val) && isInteger(val);
 const isArray = (val) => isEitherNullOrUndefined(val) && Array.isArray(val) && val.length;
@@ -31,6 +32,7 @@ const allowUserForAction = (req, res, next) => {
 module.exports = {
     isNeitherNullNorUndefined,
     isEitherNullOrUndefined,
+    isString,
     isEmptyString,
     isValidString,
     isInteger,

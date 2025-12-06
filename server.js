@@ -16,8 +16,8 @@ app.use('/auth', authRouter);
 app.use('/groups', groupsRouter);
 app.use('/expenses', expensesRouter);
 
-app.get('/', () => {
-    res.send('App is running');
+app.get('/', (req, res) => {
+    res.json({ message: 'App is running' });
 });
 
 app.listen(PORT, () => {

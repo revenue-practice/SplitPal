@@ -13,14 +13,14 @@ const userLogin = async (req, res) => {
     });
 
     const { email, password } = req.body;
-    if (!isValidString(email) || !isValidString(password)) return res.status(400).send(`Email and password should be valid`);
+    if (!isValidString(email) || !isValidString(password)) return res.status(400).json({ message: `Email and password should be valid` });
 
     try {
         const doUserExists = await isExistingUserModel(email);
-        if (!doUserExists.isUser) return res.status(404).send('User not found');
+        if (!doUserExists.isUser) return res.status(404).json({ message: 'User not found' });
             
         const doPasswordsMatch = await bcrypt.compare(password, doUserExists.data?.hashed_password);
-        if(!doPasswordsMatch) return res.status(403).send('Password is incorrect');
+        if(!doPasswordsMatch) return res.status(403).json({ message: 'Password is incorrect' });
 
         const payload = {
             id: doUserExists.data.id,
@@ -30,7 +30,7 @@ const userLogin = async (req, res) => {
         const token = jwt.sign(payload, authSecret, { expiresIn: "7d" });
         res.cookie('Authorisation', `Bearer ${token}`, { httpOnly: true, sameSite: 'lax' });
 
-        return res.status(response.code).json({
+        return res.status(doUserExists?.code).json({
             status: 'OK',
             message: 'Logged in successfully'
         });
