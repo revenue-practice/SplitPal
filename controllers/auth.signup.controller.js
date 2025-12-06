@@ -7,18 +7,18 @@ const saltRounds = Number(process.env.SALT);
 const userSignup = async (req, res) => {
     const { firstName: fName, lastName: lName, email, password } = req.body;
     if (!isValidString(email)) {
-        return res.status(400).send(`Email is required!`);
+        return res.status(400).json({ message: `Email is required!` });
     }
     if (!isValidString(password)) {
-        return res.status(400).send(`Password is required!`);
+        return res.status(400).json({ message: `Password is required!` });
     }
     if (!isValidString(fName) || !isValidString(lName)) {
-        return res.status(400).send(`First Name and Last Name both are required!`);
+        return res.status(400).json({ message: `First Name and Last Name both are required!` });
     }
 
     try {
         const doUserExists = await isExistingUserModel(email);
-        if (doUserExists.isUser) return res.status(200).send(`User already exists, kindly login`);
+        if (doUserExists.isUser) return res.status(200).json({ message: `User already exists, kindly login` });
 
         const hashedPassword = bcrypt.hashSync(password, saltRounds);
         const response = await createUserModel(email, hashedPassword, fName, lName);

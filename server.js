@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const authRouter = require('./routes/auth.route');
 const groupsRouter = require('./routes/groups.route');
 const expensesRouter = require('./routes/expenses.route');
+const userRouter = require('./routes/user.route');
 
 const app = express();
 const PORT = process.env.PORT;
@@ -15,9 +16,10 @@ app.use(cookieParser());
 app.use('/auth', authRouter);
 app.use('/groups', groupsRouter);
 app.use('/expenses', expensesRouter);
+app.use('/user', userRouter);
 
-app.get('/', () => {
-    res.send('App is running');
+app.get('/', (req, res) => {
+    res.json({ message: 'App is running' });
 });
 
 app.listen(PORT, () => {

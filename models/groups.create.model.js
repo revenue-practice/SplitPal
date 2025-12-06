@@ -1,4 +1,4 @@
-const { DBTABLES, internalServerErrorCode, createRecordSuccessCode } = require('../utils/constants');
+const { DBTABLES, noDataReturnedErrorCode, createRecordSuccessCode } = require('../utils/constants');
 const { executeAsyncQueryWithoutLock } = require('../utils/helper');
 const { v4: uuidv4 } = require('uuid');
 
@@ -11,10 +11,12 @@ const createGroupModel = async (name, description, owner_id) => {
         const groupMembersQuery = `INSERT INTO ${DBTABLES.groupMembers} VALUES ($1, $2, $3, $4, $5, $6)`;
         const groupMembersQueryParams = [groupMemberId, owner_id, groupId, true, currentTime, currentTime];
 
-        const response = await Promise.all([executeAsyncQueryWithoutLock(groupQuery, groupQueryParams), executeAsyncQueryWithoutLock(groupMembersQuery, groupMembersQueryParams)]);
+        const groupResponse = await executeAsyncQueryWithoutLock(groupQuery, groupQueryParams);
+        const groupMemberResponse = await executeAsyncQueryWithoutLock(groupMembersQuery, groupMembersQueryParams);
+        const response = [groupResponse, groupMemberResponse];
         if (response.length === 2 && response[0].rowCount && response[1].rowCount) return createRecordSuccessCode;
 
-        return internalServerErrorCode;
+        return noDataReturnedErrorCode;
     }
     catch (error) {
         throw new Error(error);

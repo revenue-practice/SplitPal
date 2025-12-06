@@ -1,4 +1,4 @@
-const { DBTABLES, internalServerErrorCode, createRecordSuccessCode } = require("../utils/constants");
+const { DBTABLES, noDataReturnedErrorCode, createRecordSuccessCode } = require("../utils/constants");
 const { v4: uuidv4 } = require('uuid');
 const { executeAsyncQueryWithoutLock } = require("../utils/helper");
 
@@ -29,7 +29,7 @@ const createExpenseModel = async (groupId, payerId, name, description, totalAmou
             if (response.rowCount) return createRecordSuccessCode;
         }
 
-        return internalServerErrorCode;
+        return noDataReturnedErrorCode;
     }
     catch (error) {
         throw new Error(error);
@@ -63,7 +63,7 @@ const editExpenseModel = async (groupId, payerId, expenseId, name, description, 
             if (response.rowCount) return createRecordSuccessCode;
         }
 
-        return internalServerErrorCode;
+        return noDataReturnedErrorCode;
     }
     catch (error) {
         throw new Error(error);

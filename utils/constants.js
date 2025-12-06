@@ -13,12 +13,13 @@ const statusResponse = {
 
 const errorResponse = (res, response, error) => {
     res.status(response.code ?? 500).json({
-        status: '',
-        message: error.message ?? 'Internal Server Error'
+        status: response.status ?? '',
+        message: response.message ?? error.message ?? 'Internal Server Error'
     });
 }
 
 const internalServerErrorCode = { code: 500 };
+const noDataReturnedErrorCode = { code: 400, message: 'No data found' };
 const createRecordSuccessCode = { code: 201 };
 const acceptedSuccessCode = { code: 200 };
 
@@ -27,6 +28,7 @@ module.exports = {
     statusResponse,
     errorResponse,
     internalServerErrorCode,
+    noDataReturnedErrorCode,
     createRecordSuccessCode,
     acceptedSuccessCode
 };
