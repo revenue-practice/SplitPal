@@ -16,7 +16,7 @@ const errorResponse = (res, response, error) => {
         status: response.status ?? '',
         message: response.message ?? error.message ?? 'Internal Server Error'
     });
-}
+};
 
 const internalServerErrorCode = { code: 500 };
 const noDataReturnedErrorCode = { code: 400, message: 'No data found' };
