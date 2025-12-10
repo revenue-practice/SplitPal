@@ -1,0 +1,94 @@
+curl --location 'http://localhost:3006/expenses/create/2c0237e7-c069-40e1-bf0b-e3a2caccdc18/d30b74ef-1b81-4d4d-8d16-e1c83e404cf7' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: Authorisation=Bearer%20eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI2YTgzZThiLTNmZGYtNDcwMi1iZGEwLTJmMDM0NWU4MzllYiIsImVtYWlsIjoicmFuc2hhbmFuZEBnbWFpbC5jb20iLCJpYXQiOjE3NjUyODEwMzcsImV4cCI6MTc2NTg4NTgzN30.jocHOLOK_iqHT7loQx82Xc8QjA0Ykqj2UUfMnbf3uAo; Authorisation=Bearer%20eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI2YTgzZThiLTNmZGYtNDcwMi1iZGEwLTJmMDM0NWU4MzllYiIsImVtYWlsIjoicmFuc2hhbmFuZEBnbWFpbC5jb20iLCJpYXQiOjE3NjUyODEwMzcsImV4cCI6MTc2NTg4NTgzN30.jocHOLOK_iqHT7loQx82Xc8QjA0Ykqj2UUfMnbf3uAo' \
+--data '{
+    "name": "Auto",
+    "description": "Auto Rickshaw",
+    "total_amount": 50,
+    "members": [
+        {
+            "receiver_id": "1f77a266-b994-48db-8efc-ac67bc6ee76a",
+            "amount": 17
+        },
+        {
+            "receiver_id": "b6a83e8b-3fdf-4702-bda0-2f0345e839eb",
+            "amount": 16
+        }
+    ]
+}'
+
+curl --location 'http://localhost:3006/expenses/create/2c0237e7-c069-40e1-bf0b-e3a2caccdc18/d30b74ef-1b81-4d4d-8d16-e1c83e404cf7' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: Authorisation=Bearer%20eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI2YTgzZThiLTNmZGYtNDcwMi1iZGEwLTJmMDM0NWU4MzllYiIsImVtYWlsIjoicmFuc2hhbmFuZEBnbWFpbC5jb20iLCJpYXQiOjE3NjUyODEwMzcsImV4cCI6MTc2NTg4NTgzN30.jocHOLOK_iqHT7loQx82Xc8QjA0Ykqj2UUfMnbf3uAo; Authorisation=Bearer%20eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI2YTgzZThiLTNmZGYtNDcwMi1iZGEwLTJmMDM0NWU4MzllYiIsImVtYWlsIjoicmFuc2hhbmFuZEBnbWFpbC5jb20iLCJpYXQiOjE3NjUyODEwMzcsImV4cCI6MTc2NTg4NTgzN30.jocHOLOK_iqHT7loQx82Xc8QjA0Ykqj2UUfMnbf3uAo' \
+--data '{
+    "name": "Ebike",
+    "description": "Ebike",
+    "total_amount": 50,
+    "members": [
+        {
+            "receiver_id": "1f77a266-b994-48db-8efc-ac67bc6ee76a",
+            "amount": 17
+        },
+        {
+            "receiver_id": "b6a83e8b-3fdf-4702-bda0-2f0345e839eb",
+            "amount": 16
+        }
+    ]
+}'
+
+curl --location 'http://localhost:3006/expenses/create/2c0237e7-c069-40e1-bf0b-e3a2caccdc18/d30b74ef-1b81-4d4d-8d16-e1c83e404cf7' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: Authorisation=Bearer%20eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI2YTgzZThiLTNmZGYtNDcwMi1iZGEwLTJmMDM0NWU4MzllYiIsImVtYWlsIjoicmFuc2hhbmFuZEBnbWFpbC5jb20iLCJpYXQiOjE3NjUyODEwMzcsImV4cCI6MTc2NTg4NTgzN30.jocHOLOK_iqHT7loQx82Xc8QjA0Ykqj2UUfMnbf3uAo; Authorisation=Bearer%20eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI2YTgzZThiLTNmZGYtNDcwMi1iZGEwLTJmMDM0NWU4MzllYiIsImVtYWlsIjoicmFuc2hhbmFuZEBnbWFpbC5jb20iLCJpYXQiOjE3NjUyODEwMzcsImV4cCI6MTc2NTg4NTgzN30.jocHOLOK_iqHT7loQx82Xc8QjA0Ykqj2UUfMnbf3uAo' \
+--data '{
+    "name": "Clothes",
+    "description": "Clothes",
+    "total_amount": 100,
+    "members": [
+        {
+            "receiver_id": "1f77a266-b994-48db-8efc-ac67bc6ee76a",
+            "amount": 33
+        },
+        {
+            "receiver_id": "b6a83e8b-3fdf-4702-bda0-2f0345e839eb",
+            "amount": 33
+        }
+    ]
+}'
+
+curl --location 'http://localhost:3006/expenses/create/2c0237e7-c069-40e1-bf0b-e3a2caccdc18/d30b74ef-1b81-4d4d-8d16-e1c83e404cf7' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: Authorisation=Bearer%20eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI2YTgzZThiLTNmZGYtNDcwMi1iZGEwLTJmMDM0NWU4MzllYiIsImVtYWlsIjoicmFuc2hhbmFuZEBnbWFpbC5jb20iLCJpYXQiOjE3NjUyODEwMzcsImV4cCI6MTc2NTg4NTgzN30.jocHOLOK_iqHT7loQx82Xc8QjA0Ykqj2UUfMnbf3uAo; Authorisation=Bearer%20eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI2YTgzZThiLTNmZGYtNDcwMi1iZGEwLTJmMDM0NWU4MzllYiIsImVtYWlsIjoicmFuc2hhbmFuZEBnbWFpbC5jb20iLCJpYXQiOjE3NjUyODEwMzcsImV4cCI6MTc2NTg4NTgzN30.jocHOLOK_iqHT7loQx82Xc8QjA0Ykqj2UUfMnbf3uAo' \
+--data '{
+    "name": "Flight",
+    "description": "Flight",
+    "total_amount": 3000,
+    "members": [
+        {
+            "receiver_id": "1f77a266-b994-48db-8efc-ac67bc6ee76a",
+            "amount": 1000
+        },
+        {
+            "receiver_id": "b6a83e8b-3fdf-4702-bda0-2f0345e839eb",
+            "amount": 1000
+        }
+    ]
+}'
+
+curl --location 'http://localhost:3006/expenses/create/2c0237e7-c069-40e1-bf0b-e3a2caccdc18/1f77a266-b994-48db-8efc-ac67bc6ee76a' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: Authorisation=Bearer%20eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI2YTgzZThiLTNmZGYtNDcwMi1iZGEwLTJmMDM0NWU4MzllYiIsImVtYWlsIjoicmFuc2hhbmFuZEBnbWFpbC5jb20iLCJpYXQiOjE3NjUyODEwMzcsImV4cCI6MTc2NTg4NTgzN30.jocHOLOK_iqHT7loQx82Xc8QjA0Ykqj2UUfMnbf3uAo; Authorisation=Bearer%20eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI2YTgzZThiLTNmZGYtNDcwMi1iZGEwLTJmMDM0NWU4MzllYiIsImVtYWlsIjoicmFuc2hhbmFuZEBnbWFpbC5jb20iLCJpYXQiOjE3NjUyODEwMzcsImV4cCI6MTc2NTg4NTgzN30.jocHOLOK_iqHT7loQx82Xc8QjA0Ykqj2UUfMnbf3uAo' \
+--data '{
+    "name": "Return Flight",
+    "description": "Return Flight",
+    "total_amount": 6000,
+    "members": [
+        {
+            "receiver_id": "d30b74ef-1b81-4d4d-8d16-e1c83e404cf7",
+            "amount": 2000
+        },
+        {
+            "receiver_id": "b6a83e8b-3fdf-4702-bda0-2f0345e839eb",
+            "amount": 2000
+        }
+    ]
+}'

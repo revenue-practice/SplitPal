@@ -1,4 +1,4 @@
-const { isValidString } = require('../utils/helper');
+const { isValidString, isArray } = require('../utils/helper');
 const { statusResponse, errorResponse } = require('../utils/constants');
 const { createGroupModel } = require('../models/groups.create.model');
 const { editGroupModel } = require('../models/groups.edit.model');
@@ -8,14 +8,18 @@ const { addMemberToGroupModel } = require('../models/group_members.add.model');
 const { response } = require('express');
 
 const createGroup = async (req, res) => {
-    const { name, description, owner_id } = req.body;
-    if (!isValidString(owner_id)) return res.status(403).json({ message: statusResponse[403] });
+    const { owner_id: ownerId } = req.params;
+    const { name, description, members } = req.body;
+    if (!isValidString(ownerId)) return res.status(403).json({ message: statusResponse[403] });
 
     if (!(isValidString(name) && isValidString(description)))
         return res.status(400).json({ message: 'Name and Description must be valid' });
 
+    if(!isArray(members)) 
+        return res.status(400).json({ message: 'Group must have atleast 1 member' });
+
     try {
-        const response = await createGroupModel(name, description, owner_id);
+        const response = await createGroupModel(name, description, ownerId, members);
         if (response.code === 201) return res.status(response.code).json({
             status: 'Ok',
             message: 'Group created successfully'

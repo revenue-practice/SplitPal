@@ -5,7 +5,7 @@ const { allowUserForAction } = require('../utils/helper');
 const { createGroup, addMemberToGroup, editGroup, transferGroupOwnerShip, fetchAllUsers } = require('../controllers/groups.controller');
 
 router.use(allowUserForAction);
-router.post('/create', createGroup);
+router.post('/create/:owner_id', createGroup);
 router.post('/addMember/:id/:memberId', addMemberToGroup);
 router.put('/edit/:id', editGroup);
 router.put('/transfer/:id/:ownerId', transferGroupOwnerShip);

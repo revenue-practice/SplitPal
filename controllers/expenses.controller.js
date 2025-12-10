@@ -13,7 +13,7 @@ const createExpense = async (req, res) => {
 
     try {
         const response = await createExpenseModel(groupId, userId, name, description, totalAmount, memberParticipation);
-        if(response.code === 201) return res.status(response.code).json({ message: `Expense created successfully` });
+        if(response.code === 201) return res.status(response.code).json({ message: `${name} Expense created successfully` });
 
         errorResponse(res, response);
     }
@@ -33,7 +33,7 @@ const editExpense = async (req, res) => {
 
     try {
         const response = await editExpenseModel(groupId, userId, expenseId, name, description, totalAmount, memberParticipation);
-        if(response.code === 200) return res.status(response.code).json({ message: `Expense updated successfully` });
+        if(response.code === 200) return res.status(response.code).json({ message: `${name} Expense updated successfully` });
 
         errorResponse(res, response);
     }

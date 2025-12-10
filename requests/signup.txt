@@ -1,0 +1,30 @@
+curl --location 'http://localhost:3006/auth/signup' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: Authorisation=Bearer%20eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI2YTgzZThiLTNmZGYtNDcwMi1iZGEwLTJmMDM0NWU4MzllYiIsImVtYWlsIjoicmFuc2hhbmFuZEBnbWFpbC5jb20iLCJpYXQiOjE3NjUyODEwMzcsImV4cCI6MTc2NTg4NTgzN30.jocHOLOK_iqHT7loQx82Xc8QjA0Ykqj2UUfMnbf3uAo' \
+--data-raw '{
+    "firstName": "Ankit",
+    "lastName": "Anand",
+    "email": "ankitanand@gmail.com",
+    "password": "5435"
+}'
+
+curl --location 'http://localhost:3006/auth/signup' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: Authorisation=Bearer%20eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI2YTgzZThiLTNmZGYtNDcwMi1iZGEwLTJmMDM0NWU4MzllYiIsImVtYWlsIjoicmFuc2hhbmFuZEBnbWFpbC5jb20iLCJpYXQiOjE3NjUyODEwMzcsImV4cCI6MTc2NTg4NTgzN30.jocHOLOK_iqHT7loQx82Xc8QjA0Ykqj2UUfMnbf3uAo' \
+--data-raw '{
+    "firstName": "Riya",
+    "lastName": "Sharma",
+    "email": "riyasharma@gmail.com",
+    "password": "9798"
+}'
+
+curl --location 'http://localhost:3006/auth/signup' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: Authorisation=Bearer%20eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI2YTgzZThiLTNmZGYtNDcwMi1iZGEwLTJmMDM0NWU4MzllYiIsImVtYWlsIjoicmFuc2hhbmFuZEBnbWFpbC5jb20iLCJpYXQiOjE3NjUyODEwMzcsImV4cCI6MTc2NTg4NTgzN30.jocHOLOK_iqHT7loQx82Xc8QjA0Ykqj2UUfMnbf3uAo' \
+--data-raw '{
+    "firstName": "Ransh",
+    "lastName": "Anand",
+    "email": "ranshanand@gmail.com",
+    "password": "0789"
+}'
+
