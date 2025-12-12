@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS EXPENSES (
     group_id uuid NOT NULL,
     payer_id uuid NOT NULL,
     total_amount INT NOT NULL,
+    amount INT NOT NULL,
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMPTZ NOT NULL,
     FOREIGN KEY (group_id) REFERENCES GROUPS(id) ON DELETE CASCADE,
