@@ -5,6 +5,7 @@ const DBTABLES = {
     groupMembers: 'GROUP_MEMBERS',
     expenses: 'EXPENSES',
     splits: 'SPLITS',
+    settlements: 'SETTLEMENTS'
 };
 
 const statusResponse = {

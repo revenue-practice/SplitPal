@@ -1,0 +1,19 @@
+curl --location 'http://localhost:3006/settlements/create/d30b74ef-1b81-4d4d-8d16-e1c83e404cf7/b6a83e8b-3fdf-4702-bda0-2f0345e839eb/2c0237e7-c069-40e1-bf0b-e3a2caccdc18' \
+--header 'Cookie: Authorisation=Bearer%20eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI2YTgzZThiLTNmZGYtNDcwMi1iZGEwLTJmMDM0NWU4MzllYiIsImVtYWlsIjoicmFuc2hhbmFuZEBnbWFpbC5jb20iLCJpYXQiOjE3NjUyODEwMzcsImV4cCI6MTc2NTg4NTgzN30.jocHOLOK_iqHT7loQx82Xc8QjA0Ykqj2UUfMnbf3uAo' \
+--header 'Content-Type: application/json' \
+--data '{
+    "settlements": [
+        {
+            "id": "9e0c9dac-9f64-40eb-959c-40056c9c4ba0",
+            "amount": 16
+        },
+        {
+            "id": "95b6ab02-6faf-4a52-9877-02544b3b1216",
+            "amount": 16
+        },
+        {
+            "id": "ea0e76b8-8e44-4621-8e72-42a31cacfdda",
+            "amount": 33
+        }
+    ]
+}'

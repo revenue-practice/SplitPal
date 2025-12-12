@@ -6,14 +6,14 @@ const createExpense = async (req, res) => {
     const { group_id: groupId, user_id: userId } = req.params;
     if(!isValidString(groupId) || !isValidString(userId)) return res.status(403).json({ message: statusResponse[403] });
 
-    const { name, description, total_amount: totalAmount, members: memberParticipation } = req.body;
+    const { name, description, total_amount: totalAmount, members: memberParticipation, amount: ownerShare } = req.body;
     if(!isValidString(name) || !isString(description)) return res.status(400).json({ message: 'Both name and description should be valid' });
-    if(!isValidInteger(totalAmount)) return res.status(400).json({ message: 'Invalid amount, amount must be an integer' });
+    if(!isValidInteger(totalAmount) || !isValidInteger(ownerShare)) return res.status(400).json({ message: 'Invalid amount, amount must be an integer' });
     if(!isArray(memberParticipation)) return res.status(400).json({ message: 'Invalid member split on expense' });
 
     try {
-        const response = await createExpenseModel(groupId, userId, name, description, totalAmount, memberParticipation);
-        if(response.code === 201) return res.status(response.code).json({ message: `Expense created successfully` });
+        const response = await createExpenseModel(groupId, userId, name, description, totalAmount, memberParticipation, ownerShare);
+        if(response.code === 201) return res.status(response.code).json({ message: `${name} Expense created successfully` });
 
         errorResponse(res, response);
     }
@@ -33,7 +33,7 @@ const editExpense = async (req, res) => {
 
     try {
         const response = await editExpenseModel(groupId, userId, expenseId, name, description, totalAmount, memberParticipation);
-        if(response.code === 200) return res.status(response.code).json({ message: `Expense updated successfully` });
+        if(response.code === 200) return res.status(response.code).json({ message: `${name} Expense updated successfully` });
 
         errorResponse(res, response);
     }

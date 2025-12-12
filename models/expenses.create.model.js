@@ -2,19 +2,20 @@ const { DBTABLES, noDataReturnedErrorCode, createRecordSuccessCode, acceptedSucc
 const { v4: uuidv4 } = require('uuid');
 const { executeAsyncQueryWithoutLock } = require("../utils/helper");
 
-const createExpenseModel = async (groupId, payerId, name, description, totalAmount, memberParticipation) => {
+const createExpenseModel = async (groupId, payerId, name, description, totalAmount, ownerShare, memberParticipation) => {
     let result = 0;
-    const expenseId = uuidv4(), splitsId = uuidv4(), currentTime = new Date().toISOString();
-    const expenseQuery = `INSERT INTO ${DBTABLES.expenses} VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`;
+    const expenseId = uuidv4(), currentTime = new Date().toISOString();
+    const expenseQuery = `INSERT INTO ${DBTABLES.expenses} VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`;
     const splitsQuery = `INSERT INTO ${DBTABLES.splits} VALUES ($1, $2, $3, $4, $5, $6)`;
-    const expenseQueryParams = [expenseId, name, description, groupId, payerId, totalAmount, currentTime, currentTime];
+    const expenseQueryParams = [expenseId, name, description, groupId, payerId, totalAmount, ownerShare, currentTime, currentTime];
 
     try {
-        const response = await executeAsyncQueryWithoutLock(expenseQuery, expenseQueryParams);
-        if(response.rowCount) {
+        const expenseQueryResponse = await executeAsyncQueryWithoutLock(expenseQuery, expenseQueryParams);
+        if(expenseQueryResponse.rowCount) {
             for (let member of memberParticipation) {
                 const { receiver_id: receiverId, amount } = member;
-                const splitsQueryParams = [splitsId, expenseId, receiverId, amount, currentTime, currentTime];
+                const splitsId = uuidv4();
+                const splitsQueryParams = [splitsId, expenseId, receiverId, amount, currentTime, currentTime]; 
 
                 try {
                     const response = await executeAsyncQueryWithoutLock(splitsQuery, splitsQueryParams);
